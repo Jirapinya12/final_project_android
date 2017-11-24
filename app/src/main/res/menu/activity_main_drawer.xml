@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_allTrips"
+            android:icon="@mipmap/ic_home"
+            android:title="My Trips"/>
+        <item android:id="@+id/nav_join"
+            android:icon="@mipmap/ic_search"
+            android:title="Find Trip" />
+        <item android:id="@+id/nav_addnew"
+            android:icon="@mipmap/ic_addnew"
+            android:title="Add New Trip" />
+        <item android:id="@+id/nav_logout"
+            android:icon="@mipmap/ic_logout"
+            android:title="Logout" />
+    </group>
+
+</menu>

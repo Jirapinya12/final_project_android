@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorAccent">#36454f</color>
+    <color name="colorPrimary">#303e47</color>
+    <color name="colorPrimaryDark">#101727</color>
+    <color name="tabsScrollColor">#4d1a1a</color>
+    <color name="toolbarColor">#303e47</color>
+    <color name="floatBtnColor">#660033</color>
+    <color name="textOnToolBar">#c7e2e2</color>
+    <color name="textBoxColor">#d5d8da</color>
+    <color name="icBgTextbox">#acb1b5</color>
+</resources>
