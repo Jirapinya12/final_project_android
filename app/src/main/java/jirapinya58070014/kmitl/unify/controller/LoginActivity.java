@@ -176,12 +176,5 @@ public class LoginActivity extends AppCompatActivity {
         linearBtn.setAnimation(uptodown);
         linearCar.setAnimation(downtoup);
     }
-//    @Override
-//    public void onBackPressed() {
-//        if (getFragmentManager().getBackStackEntryCount() == 0) {
-//            this.finish();
-//        } else {
-//            getFragmentManager().popBackStack();
-//        }
-//    }
+
 }

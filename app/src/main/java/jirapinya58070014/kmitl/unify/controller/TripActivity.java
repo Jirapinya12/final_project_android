@@ -86,13 +86,4 @@ public class TripActivity extends AppCompatActivity implements infoTripFragment.
         companion.setId_Companions(idCompanions);
         firebase.getDatabase("companions").child(idCompanions).setValue(companion);
     }
-
-    @Override
-    public void onBackPressed() {
-        if (getFragmentManager().getBackStackEntryCount() == 0) {
-            this.finish();
-        } else {
-            getFragmentManager().popBackStack();
-        }
-    }
 }
