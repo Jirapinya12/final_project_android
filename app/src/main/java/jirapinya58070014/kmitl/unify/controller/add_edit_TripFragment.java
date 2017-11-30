@@ -402,6 +402,7 @@ public class add_edit_TripFragment extends Fragment implements View.OnClickListe
     public void showDialogDelete() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Confirm Delete");
+        builder.setIcon(R.drawable.delete);
         builder.setMessage("Are you sure you want to delete this trip?");
 
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {

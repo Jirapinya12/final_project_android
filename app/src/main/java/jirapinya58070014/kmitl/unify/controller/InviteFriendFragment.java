@@ -135,6 +135,7 @@ public class InviteFriendFragment extends Fragment implements View.OnClickListen
     public void showDialogInvite(final UserProfile user) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Invite Friend");
+        builder.setIcon(R.drawable.icon_add_user);
         builder.setMessage("Are you sure you want to invite "+ user.getName()+" to join trip?");
 
         builder.setPositiveButton("OK", new OnClickListener() {
