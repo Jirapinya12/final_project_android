@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "845636002585",
+    "firebase_url": "https://unify-938ee.firebaseio.com",
+    "project_id": "unify-938ee",
+    "storage_bucket": "unify-938ee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:845636002585:android:d6a27eb7f10bfd34",
+        "android_client_info": {
+          "package_name": "jirapinya58070014.kmitl.unify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "845636002585-mrplhnqhleb7pi33l61t3mkvsdh80kht.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "jirapinya58070014.kmitl.unify",
+            "certificate_hash": "2717557e8760d8abc729c8f3452be4a2c31b7e6f"
+          }
+        },
+        {
+          "client_id": "845636002585-asseglpc5kr9h2532374h19jqn4g793m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4DZWr1ydZ9162zGYBCf9tncx442Pa62g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "845636002585-asseglpc5kr9h2532374h19jqn4g793m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
