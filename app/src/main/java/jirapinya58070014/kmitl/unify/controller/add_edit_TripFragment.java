@@ -52,12 +52,26 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import jirapinya58070014.kmitl.unify.FirebaseConnection;
 import jirapinya58070014.kmitl.unify.R;
 import jirapinya58070014.kmitl.unify.model.Companions;
 import jirapinya58070014.kmitl.unify.model.MyTrip;
+import jirapinya58070014.kmitl.unify.test.MyValidator;
+import jirapinya58070014.kmitl.unify.test.dateTrip.ValidateDateTripEmpty;
+import jirapinya58070014.kmitl.unify.test.dateTrip.ValidateDateTripNull;
+import jirapinya58070014.kmitl.unify.test.descriptionTrip.ValidateDescriptionTripEmpty;
+import jirapinya58070014.kmitl.unify.test.descriptionTrip.ValidateDescriptionTripNull;
+import jirapinya58070014.kmitl.unify.test.locationTrip.ValidateLocationTripEmpty;
+import jirapinya58070014.kmitl.unify.test.locationTrip.ValidateLocationTripNull;
+import jirapinya58070014.kmitl.unify.test.nameTrip.ValidateNameTripEmpty;
+import jirapinya58070014.kmitl.unify.test.nameTrip.ValidateNameTripNull;
+import jirapinya58070014.kmitl.unify.test.timeTrip.ValidateTimeTripEmpty;
+import jirapinya58070014.kmitl.unify.test.timeTrip.ValidateTimeTripNull;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.ContentValues.TAG;
@@ -74,6 +88,7 @@ public class add_edit_TripFragment extends Fragment implements View.OnClickListe
     private String location, latitude, longitude;
     private Uri imagePathUri;
     private Double lat, lng;
+    private Boolean valid = true;
 
     private static final String USER_INFO = "user_info";
     private String id_User, name_User, imageUrl;
@@ -188,13 +203,18 @@ public class add_edit_TripFragment extends Fragment implements View.OnClickListe
         if (view == editImage) {
             addImage();
         } else if (view == btnSave) {
-            id_Trip = firebase.getDatabase("trips").push().getKey();
-            addDataCompanion();
-            addDataTrip();
-            uploadImage();
+            if(validateInput() == true) {
+                id_Trip = firebase.getDatabase("trips").push().getKey();
+                addDataCompanion();
+                addDataTrip();
+                uploadImage();
+                Toast.makeText(getActivity(),"Saved successfully.", Toast.LENGTH_LONG).show();
+            }
         } else if (view == btnUpdate) {
-            updateDataTrip();
-            uploadImage();
+            if(validateInput() == true){
+                updateDataTrip();
+                uploadImage();
+            }
         } else if (view == btnDelete) {
             showDialogDelete();
         }else if (view == pickBeginDate){
@@ -479,70 +499,42 @@ public class add_edit_TripFragment extends Fragment implements View.OnClickListe
 
     //--------------------------------- UPDATE DATA -------------------------------------//
     private void updateDataTrip() {
-        MyTrip trip = new MyTrip();
-        trip.setId_Trip(id_Trip);
-        trip.setName(name);
-        trip.setDescription(description);
-        trip.setBeginDate(beginDate);
-        trip.setEndDate(beginDate);
-        trip.setTime(time);
-        trip.setLocation(location);
-        trip.setImagePath(imagePath);
-        trip.setId_UserOwner(id_User);
-        trip.setLatitude(latitude);
-        trip.setLongitude(longitude);
+            HashMap<String, Object> postValues = new HashMap<>();
 
-        name = edNameTrip.getText().toString();
-        description = edDescriptionTrip.getText().toString();
-        beginDate = pickBeginDate.getText().toString();
-        endDate = pickEndDate.getText().toString();
-        time = pickTime.getText().toString();
-        location = pickLocation.getText().toString();
+            postValues.put("name", name);
+            postValues.put("id_Trip", id_Trip);
+            postValues.put("description", description);
+            postValues.put("beginDate", beginDate);
+            postValues.put("endDate", endDate);
+            postValues.put("time", time);
+            postValues.put("location", location);
+            postValues.put("imagePath", imagePath);
+            postValues.put("id_User", id_User);
+            postValues.put("latitude", latitude);
+            postValues.put("longitude", longitude);
 
-        HashMap<String, Object> postValues = new HashMap<>();
-
-        postValues.put("name", name);
-        postValues.put("id_Trip", id_Trip);
-        postValues.put("description", description);
-        postValues.put("beginDate", beginDate);
-        postValues.put("endDate", endDate);
-        postValues.put("time", time);
-        postValues.put("location", location);
-        postValues.put("imagePath", imagePath);
-        postValues.put("id_User", id_User);
-        postValues.put("latitude", latitude);
-        postValues.put("longitude", longitude);
-
-        firebase.getDatabase("trips").child(id_Trip).updateChildren(postValues);
+            firebase.getDatabase("trips").child(id_Trip).updateChildren(postValues);
     }
 
     //--------------------------------- ADD DATA -------------------------------------//
     private void addDataTrip() {
-        name = edNameTrip.getText().toString();
-        description = edDescriptionTrip.getText().toString();
-        beginDate = pickBeginDate.getText().toString();
-        endDate = pickEndDate.getText().toString();
-        time = pickTime.getText().toString();
-        location = pickLocation.getText().toString();
+            MyTrip trip = new MyTrip();
+            trip.setId_Trip(id_Trip);
+            trip.setId_UserOwner(id_User);
+            trip.setName(name);
+            trip.setDescription(description);
+            trip.setBeginDate(beginDate);
+            trip.setEndDate(endDate);
+            trip.setTime(time);
+            trip.setLocation(location);
+            trip.setImagePath(imagePath);
+            trip.setLatitude(latitude);
+            trip.setLongitude(longitude);
+            trip.setId_UserOwner(id_UserOwner);
 
-        MyTrip trip = new MyTrip();
-        trip.setId_Trip(id_Trip);
-        trip.setId_UserOwner(id_User);
-        trip.setName(name);
-        trip.setDescription(description);
-        trip.setBeginDate(beginDate);
-        trip.setEndDate(beginDate);
-        trip.setTime(time);
-        trip.setLocation(location);
-        trip.setImagePath(imagePath);
-        trip.setLatitude(latitude);
-        trip.setLongitude(longitude);
-        trip.setId_UserOwner(id_UserOwner);
-
-        firebase.getDatabase("trips").child(id_Trip).setValue(trip);
-        firebase.getDatabase("trips").child(id_Trip).child("id_User").setValue(id_User);
-        firebase.getDatabase("trips").child(id_Trip).child("userID: "+id_User).setValue("join");
-
+            firebase.getDatabase("trips").child(id_Trip).setValue(trip);
+            firebase.getDatabase("trips").child(id_Trip).child("id_User").setValue(id_User);
+            firebase.getDatabase("trips").child(id_Trip).child("userID: " + id_User).setValue("join");
     }
 
     private void addDataCompanion() {
@@ -555,5 +547,80 @@ public class add_edit_TripFragment extends Fragment implements View.OnClickListe
         companion.setStatus("owner");
         companion.setId_Companions(idCompanions);
         firebase.getDatabase("companions").child(idCompanions).setValue(companion);
+    }
+
+    //------------------------------- VALIDATE INPUT -----------------------------------//
+
+    private boolean validateInput() {
+        valid = true;
+
+        name = edNameTrip.getText().toString();
+        description = edDescriptionTrip.getText().toString();
+        beginDate = pickBeginDate.getText().toString();
+        endDate = pickEndDate.getText().toString();
+        time = pickTime.getText().toString();
+        location = pickLocation.getText().toString();
+
+        //validatorsName
+        List<MyValidator> validatorsName = new ArrayList<>();
+        validatorsName.add(new ValidateNameTripNull());
+        validatorsName.add(new ValidateNameTripEmpty());
+
+        for (MyValidator validator: validatorsName) {
+            if(validator.isValid(name)) {
+                Toast.makeText(getActivity(), validator.getErrorMessage(), Toast.LENGTH_LONG).show();
+                valid = false;
+            }
+        }
+
+        //validatorsDescription
+        List<MyValidator> validatorsDescription = new ArrayList<>();
+        validatorsDescription.add(new ValidateDescriptionTripNull());
+        validatorsDescription.add(new ValidateDescriptionTripEmpty());
+
+        for (MyValidator validator: validatorsDescription) {
+            if(validator.isValid(description)) {
+                Toast.makeText(getActivity(), validator.getErrorMessage(), Toast.LENGTH_LONG).show();
+                valid = false;
+            }
+        }
+
+        //validatorsDate
+        List<MyValidator> validatorsDate = new ArrayList<>();
+        validatorsDate.add(new ValidateDateTripNull());
+        validatorsDate.add(new ValidateDateTripEmpty());
+
+        for (MyValidator validator: validatorsDate) {
+            if(validator.isValid(beginDate) || validator.isValid(endDate)) {
+                Toast.makeText(getActivity(), validator.getErrorMessage(), Toast.LENGTH_LONG).show();
+                valid = false;
+            }
+        }
+
+        //validatorsTime
+        List<MyValidator> validatorsTime = new ArrayList<>();
+        validatorsTime.add(new ValidateTimeTripNull());
+        validatorsTime.add(new ValidateTimeTripEmpty());
+
+        for (MyValidator validator: validatorsTime) {
+            if(validator.isValid(time)) {
+                Toast.makeText(getActivity(), validator.getErrorMessage(), Toast.LENGTH_LONG).show();
+                valid = false;
+            }
+        }
+
+        //validatorsLocation
+        List<MyValidator> validatorsLocation = new ArrayList<>();
+        validatorsLocation.add(new ValidateLocationTripNull());
+        validatorsLocation.add(new ValidateLocationTripEmpty());
+
+        for (MyValidator validator: validatorsLocation) {
+            if(validator.isValid(location)) {
+                Toast.makeText(getActivity(), validator.getErrorMessage(), Toast.LENGTH_LONG).show();
+                valid = false;
+            }
+        }
+
+        return valid;
     }
 }

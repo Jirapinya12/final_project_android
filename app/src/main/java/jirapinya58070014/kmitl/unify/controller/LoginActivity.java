@@ -161,6 +161,8 @@ public class LoginActivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                 | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+
+        Toast.makeText(this, "LOGIN SUCCESS !!", Toast.LENGTH_LONG).show();
     }
 
     //--------------------------------- ANIMATION -------------------------------------//

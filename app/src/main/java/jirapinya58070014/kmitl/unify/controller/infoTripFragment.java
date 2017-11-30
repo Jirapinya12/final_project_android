@@ -40,8 +40,6 @@ import jirapinya58070014.kmitl.unify.model.MyTrip;
 
 public class infoTripFragment extends Fragment implements View.OnClickListener ,OnMapReadyCallback {
 
-    private static final String USER_INFO = "user_info";
-
     private String id_Trip, name, description, imagePath;
     private String time, beginDate, endDate;
     private String location, latitude, longitude;
