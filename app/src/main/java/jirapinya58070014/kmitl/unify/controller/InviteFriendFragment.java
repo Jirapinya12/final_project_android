@@ -82,7 +82,7 @@ public class InviteFriendFragment extends Fragment implements View.OnClickListen
     @Override
     public void onClick(View view) {
         if (view == closeBtn) {
-            goToCompanionsTripFragment();
+            closeInviteFriendFragment();
         }
     }
 
@@ -148,9 +148,7 @@ public class InviteFriendFragment extends Fragment implements View.OnClickListen
                 //add companions table
                 addDataCompanion(user);
 
-                getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById(R.id.companionsContainer)).commit();
-                getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById(R.id.inviteContainer)).commit();
-                getActivity().finish();
+                closeInviteFriendFragment();
 
             }
         });
@@ -177,9 +175,9 @@ public class InviteFriendFragment extends Fragment implements View.OnClickListen
     }
 
     //------------------------------ GO TO ANOTHER PAGE -----------------------------------//
-    private void goToCompanionsTripFragment() {
-        getFragmentManager().beginTransaction()
-                .replace(R.id.companionsContainer, CompanionsTripFragment.newInstance(trip, statusUser))
-                .commit();
+    private void closeInviteFriendFragment() {
+        getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById(R.id.companionsContainer)).commit();
+        getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById(R.id.inviteContainer)).commit();
+        getActivity().finish();
     }
 }
