@@ -3,7 +3,8 @@ package jirapinya58070014.kmitl.unify.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Companions implements Parcelable {
+public class
+Companions implements Parcelable {
     private String name;
     private String imagePath;
     private String id_User;

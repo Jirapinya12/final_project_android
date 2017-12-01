@@ -54,7 +54,7 @@
         <uses-library android:name="com.google.android.maps" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyB_jFex6FpnB4FbhKULbzkwI7y5C4keCmY" />
 
     </application>
 
