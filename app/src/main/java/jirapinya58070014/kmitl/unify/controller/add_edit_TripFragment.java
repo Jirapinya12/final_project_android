@@ -611,16 +611,16 @@ public class add_edit_TripFragment extends Fragment implements View.OnClickListe
         }
 
         //validatorsLocation
-        List<MyValidator> validatorsLocation = new ArrayList<>();
-        validatorsLocation.add(new ValidateLocationTripNull());
-        validatorsLocation.add(new ValidateLocationTripEmpty());
-
-        for (MyValidator validator: validatorsLocation) {
-            if(validator.isValid(location)) {
-                Toast.makeText(getActivity(), validator.getErrorMessage(), Toast.LENGTH_LONG).show();
-                valid = false;
-            }
-        }
+//        List<MyValidator> validatorsLocation = new ArrayList<>();
+//        validatorsLocation.add(new ValidateLocationTripNull());
+//        validatorsLocation.add(new ValidateLocationTripEmpty());
+//
+//        for (MyValidator validator: validatorsLocation) {
+//            if(validator.isValid(location)) {
+//                Toast.makeText(getActivity(), validator.getErrorMessage(), Toast.LENGTH_LONG).show();
+//                valid = false;
+//            }
+//        }
 
         return valid;
     }
