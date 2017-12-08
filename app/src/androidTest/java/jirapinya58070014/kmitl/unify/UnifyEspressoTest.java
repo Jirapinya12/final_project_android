@@ -237,7 +237,7 @@ public class UnifyEspressoTest {
                         childAtPosition(
                                 withId(R.id.relativeListview),
                                 0)))
-                .atPosition(2);
+                .atPosition(0);
         tripItem.perform(click());
         SystemClock.sleep(1000);
 
